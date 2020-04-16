@@ -1,0 +1,1 @@
+web: gunicorn Technosnab.wsgi --log-file -
