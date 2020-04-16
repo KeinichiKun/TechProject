@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Заказы{% endblock %}
+
+{% block content%}
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1>Заказы:</h1>
+			<p>
+				<a href="create/" class="btn btn-primary">Добавить</a>
+			</p>
+			
+			<table class="table table-bordered">
+			  <thead>
+			    <tr>
+			      <th scope="col">Гос. номер транспорта</th>
+			      <th scope="col">ФИО водителя</th>
+			      <th scope="col">ФИО заказчика</th>
+			      <!--<th scope="col">Номер телефона заказчика</th>-->
+			      <th scope="col">Адрес</th>
+			      <th scope="col">Товар/услуга</th>
+			      <th scope="col">Количество</th>
+			      
+			      <th scope="col">Время</th>
+			      <th scope="col">Стоимость</th>
+			    
+			      <th scope="col"></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for orders in orders %}
+			    	<tr {% if orders.status == 'C'  %} class='table-success' {% endif %}>
+					      <td>{{orders.car}}</td>
+					      <td>{{orders.worker}}</td>
+					      <td>{{orders.customer}}</td>
+					      <td>{{orders.adress}}</td>
+					      <td>{{orders.product}}</td>
+					      <td>{{orders.quantity}}</td>
+					      <td>{{orders.time}}</td>
+					      <td>{{orders.final_price}}</td>
+					      
+					      <td><a href="edit/{{orders.id}}">Изменить </a> | <a href="delete/{{orders.id}}">Удалить</a> | <a href="complite/{{orders.id}}">Выполнить</a></td>
+			   	 	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Сотрудники{% endblock %}
+
+{% block filesLink %}
+	
+{% load static %}
+    
+{% endblock %}
+	
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h1>Сотрудники:</h1>
+			<p><a href="create/" class="btn btn-primary">Добавить</a></p>
+			<!--
+			<p><form action="{% url 'search_workers' %}" method="get" class="form-inline">
+			    <input class="form-control mr-sm-2" type="search" name="q" placeholder="Поиск..." aria-label="Search">
+			    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+			</form></p>-->
+			<table class="table table-bordered">
+			  <thead>
+			    <tr>
+			      <th scope="col">ФИО</th>
+			      <th scope="col">Должность</th>
+			      <th scope="col">Телефон</th>
+			      <th scope="col">Паспорт</th>
+			      <th scope="col">Адрес</th>
+			      <th scope="col"></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for person in worker %}
+			    	<tr>
+					      <td>{{person.first_name}} {{person.middle_name}} {{person.last_name}}</td>
+
+					      <td>{{person.P_position}}</td>
+					      <td>{{person.phone}}</td>
+					      <td>{{person.passport_seria}}, {{person.passport_number}}, {{person.passport_issued}}, {{person.passport_date}}</td>
+					      <td>{{person.adress}}</td>
+					      <td><a href="edit/{{person.id}}">Изменить </a> | <a href="delete/{{person.id}}">Удалить</a> | <a href="tabel/{{person.id}}">Табель</a></td>
+			   	 	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+
+		</div>
+	</div>
+</div>
+
+	
+		
+
+		
+{% endblock %}

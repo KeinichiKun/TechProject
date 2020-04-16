@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Форма изменения заказа{% endblock %}
+
+{% block filesLink %}
+	
+{% load static %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-6">
+			<form method="POST">
+        	{% csrf_token %}
+        				<h1>Форма изменения заказа:</h1>
+			        	<p>
+			        		<input type="submit" value="Сохранить"  class="btn btn-primary">
+			        	</p>
+        	
+        				<p>
+				            <label>Выберете транспорт:</label><br>
+				            <select class="form-control" name="car">
+				            	{% for car in car %}
+								<option value="{{car.id}}">{{car.state_number}}</option>
+								{% endfor %}
+							</select>
+				        </p>
+				        <p>
+				            <label>Выберете работника:</label><br>
+				            <select class="form-control" name="worker">
+				            	{% for worker in worker %}
+								<option value="{{worker.id}}">{{worker.first_name}} {{worker.middle_name}} {{worker.last_name}}</option>
+								{% endfor %}
+							</select>
+				        </p>
+				        <p>
+				            <label>Выберете заказчика:</label><br>
+				            <select class="form-control" name="customer">
+				            	{% for customer in customer %}
+								<option value="{{customer.id}}">{{customer.first_name}} {{customer.middle_name}} {{customer.last_name}}</option>
+								{% endfor %}
+							</select>
+				        </p>
+				        <p>
+				            <label>Выберете товар:</label><br>
+				            <select class="form-control" name="product">
+				            	{% for product in product %}
+								<option value="{{product.id}}">{{product.product_caption}}</option>
+								{% endfor %}
+							</select>
+				        </p>
+				        <p>
+				            <label>Введите количество:</label><br>
+				            <input type="number" name="quantity" class="form-control" placeholder="Введите количество"/>
+				        </p>
+				        <p>
+				            <label>Введите время:</label><br>
+				            <input type="number" name="time" class="form-control" placeholder="Введите время"/>
+				        </p>
+				        <p>
+				            <label>Введите final_price:</label><br>
+				            <input type="number" name="final_price" class="form-control" placeholder="Введите фамилию"/>
+				        </p>
+				        <p>
+				            <label>Введите адрес:</label><br>
+				            <input type="text" name="adress" class="form-control" placeholder="Введите адрес" maxlength="20"/>
+				        </p>
+        				
+    		</form>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

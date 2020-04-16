@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Заказчики{% endblock %}
+
+{% block filesLink %}
+	
+{% load static %}
+    
+
+ 
+{% endblock %}
+	
+{% block content %}
+
+	
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>Заказчики:</h1>
+					<p><a href="create/" class="btn btn-primary">Добавить</a></p>
+					
+					<!--<p><form action="" method="get" class="form-inline">
+					    <input class="form-control mr-sm-2" type="search" name="q" placeholder="Поиск..." aria-label="Search">
+					    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+					</form></p>-->
+					<table class="table table-bordered">
+					  <thead>
+					    <tr>
+					      <th scope="col">ФИО</th>
+					      <th scope="col">Организация</th>
+					      <th scope="col">Адрес</th>
+					      <th scope="col">Телефон</th>
+					      <th scope="col">Тип заказчика</th>
+					      <th scope="col">ИНН</th>
+					      <th scope="col">КПП</th>
+					      <th scope="col">Банк</th>
+					      <th scope="col">Р/с</th>
+					      <th scope="col">Корр. счет</th>
+					      <th scope="col">БИК</th>
+					      <th scope="col">E-mail</th>
+					      <th scope="col">Количесво заказов</th>
+					      
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	{% for customer in customer %}
+					    	<tr>
+							      <td>{{customer.first_name}} {{customer.middle_name}} {{customer.last_name}}</td>
+							      <td>{{customer.organization}}</td>
+							      <td>{{customer.adres}}</td>
+							      <td>{{customer.phone}}</td>
+							      <td>{{customer.T_customer}}</td>
+							      <td>{{customer.inn}}</td>
+							      <td>{{customer.kpp}}</td>
+							      <td>{{customer.bank}}</td>
+							      <td>{{customer.rs}}</td>
+							      <td>{{customer.ks}}</td>
+							      <td>{{customer.bik}}</td>
+							      <td>{{customer.email}}</td>
+							      <td><a href="edit/{{customer.id}}">Изменить </a> | <a href="delete/{{customer.id}}">Удалить</a></td>
+					   	 	</tr>
+					    {% endfor %}
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		
+{% endblock %}

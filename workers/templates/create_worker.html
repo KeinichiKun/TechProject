@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}Форма добавление сотрудника{% endblock %}
+
+{% block filesLink %}
+	
+{% load static %}
+
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+						<div class="container">
+						    <div class="row">
+						        <div class='col-sm-8'>
+						            <div class="form-group">
+							        	{% csrf_token %}
+								        <h1>Форма добавление сотрудника:</h1>
+			            			</div>
+						        </div>
+						    </div>
+						</div>						            		
+			
+ 				        <div class="container">
+						    <div class="row">
+						        <div class='col-sm-6'>
+						            <div class="form-group"> 
+							            <label>Введите фамилию:</label><br>
+							            <input type="text" name="first_name" class="form-control" placeholder="Введите фамилию" maxlength="20"/>
+			            			</div>
+						        </div>
+						    </div>
+						</div>							            
+				        <div class="container">
+						    <div class="row">
+						        <div class='col-sm-6'>
+						            <div class="form-group"> 
+							            <label>Введите имя:</label><br>
+							            <input type="text" name="middle_name" class="form-control" placeholder="Введите имя" maxlength="20"/>
+			            			</div>
+						        </div>
+						    </div>
+						</div>							            
+				        <div class="container">
+						    <div class="row">
+						        <div class='col-sm-6'>
+						            <div class="form-group"> 
+							            <label>Введите отчество:</label><br>
+							            <input type="text" name="last_name" class="form-control" placeholder="Введите отчество" maxlength="20"/>
+			            			</div>
+						        </div>
+						    </div>
+						</div>								            
+				        <div class="container">
+						    <div class="row">
+						        <div class='col-sm-6'>
+						            <div class="form-group"> 
+							            <label>Выберете должность:</label><br>
+							            <select name="position" class="form-control">
+							            	{% for position in position %}
+							            	<option name="position" value="{{position.id}}">{{position.position_caption}}</option>
+							            	{% endfor %}
+							            </select>
+							        </div>
+						        </div>
+						    </div>
+						</div>
+				        <div class="container">
+						    <div class="row">
+						        <div class='col-sm-6'>
+						            <div class="form-group"> 
+							            <label>Введите телефон:</label><br>
+							            <input type="text" name="phone" class="form-control" placeholder="Введите телефон" maxlength="11"/>
+							        </div>
+						        </div>
+						    </div>
+						</div>
+				        <div class="container">
+						    <div class="row">
+						        <div class='col-sm-6'>
+						            <div class="form-group"> 				 
+							            <label>Серия паспорта:</label><br>
+							            <input type="number" name="passport_seria" class="form-control" placeholder="Введите серию" maxlength="4"/>
+			            			</div>
+						        </div>
+						    </div>
+						</div>
+				        <div class="container">
+						    <div class="row">
+						        <div class='col-sm-6'>
+						            <div class="form-group">      
+										<label>Номер паспорта:</label><br>
+				            			<input type="number" name="passport_number" class="form-control" placeholder="Введите номер" maxlength="6"/>
+						            </div>
+						        </div>
+						    </div>
+						</div>
+				        <div class="container">
+						    <div class="row">
+						        <div class='col-sm-6'>
+						            <div class="form-group">
+						                <label>Кем выдан:</label><br>
+				            			<input type="text" name="passport_issued" class="form-control" placeholder="Введите кем выдан" maxlength="100"/>
+						            </div>
+						        </div>
+						    </div>
+						</div>
+				        <div class="container">
+						    <div class="row">
+						        <div class='col-sm-6'>
+						            <div class="form-group">
+						            	<label>Когда выдан:</label><br>
+										<input type="date" class="form-control" id="date" name="passport_date" placeholder="Введите дату выдачи" required>
+						            </div>
+						        </div>
+						    </div>
+						</div>
+				        <div class="container">
+						    <div class="row">
+						        <div class='col-sm-6'>
+						            <div class="form-group"> 
+							            <label>Введите адрес:</label><br>
+							            <input type="text" name="adress" class="form-control" placeholder="Введите адрес" maxlength="100"/>
+						            </div>
+						        </div>
+						    </div>
+						    <input type="submit" class="btn btn-primary" value="Сохранить" >
+      
+						</div>
+						
+					    		
+			
+
+</form>
+
+{% endblock %}

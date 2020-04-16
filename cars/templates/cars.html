@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Автопарк{% endblock %}
+
+{% block content%}
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h1>Автопарк:</h1>
+			<p><a href="create/" class="btn btn-primary">Добавить</a></p>
+			<!--<form action="{% url 'search_car' %}" method="get" class="form-inline">
+			    <input class="form-control mr-sm-2" type="search" name="q" placeholder="Поиск..." aria-label="Search" required="">
+			    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+			</form>-->
+			<table class="table table-bordered ">
+			  <thead>
+			    <tr>
+			      <th scope="col">Гос. номер</th>
+			      <th scope="col">Модель</th>
+			      <th scope="col">Марка</th>
+			      <th scope="col">Спецификация</th>
+			      <th scope="col">Грузоподъемность/вместимость</th>
+			      <th scope="col">Действие?</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for cars in cars %}
+			    	<tr>
+					      <td>{{cars.state_number}}</td>
+					      <td>{{cars.Model_caption}}</td>
+					      <td>{{cars.Mark_caption}}</td>
+					      <td>{{cars.Spec_caption}}</td>
+					      <td>{{cars.carrying}}</td>
+					      <td><a href="delete/{{cars.id}}">Удалить</a> | <a href="detail/{{cars.id}}">Подробнее</a></td>
+			   	 	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

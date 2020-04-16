@@ -1,0 +1,293 @@
+{% extends 'base.html' %}
+
+{% block title %}Транспорт: {{car.state_number}}{% endblock %}
+
+{% block filesLink %}
+	
+{% load static %}
+
+{% endblock %}
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+<style>
+    .Up {
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="container">
+	<div class="row">
+		<div class="col"
+			><h1 name="state_number">Транспорт: {{car.state_number}}</h1>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+			
+			
+			<form method="POST">
+				<div class="container">
+					<div class="row">
+						<div class='col-sm-8'>
+							<div class="form-group">
+				<input type="submit" class="btn btn-primary" value="Сохранить" >
+
+			       {% csrf_token %} 
+						    </div>
+						</div>
+					</div>
+				</div>	    
+			    <div class="container">
+					<div class="row">
+						<div class='col-sm-8'>
+							<div class="form-group">   					
+							            <label>Введите гос. номер:</label><br>
+							            <input type="text" name="state_number" value="{{car.state_number}}" class="form-control Up" placeholder="Введите гос. номер" maxlength="6" />
+						    </div>
+						</div>
+					</div>
+				</div>			            
+				<div class="container">
+					<div class="row">
+						<div class='col-sm-8'>
+							<div class="form-group">			      
+							            <label>Введите модель:</label><br>
+							            <input type="text" name="Model_caption" value="{{car.Model_caption}}" class="form-control" placeholder="Введите модель" maxlength="30"/>
+						    </div>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class='col-sm-8'>
+							<div class="form-group">			      
+							            <label>Введите марку:</label><br>
+							            <input type="text" name="Mark_caption" value="{{car.Mark_caption}}" class="form-control" placeholder="Введите марку" maxlength="30">
+						    </div>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class='col-sm-8'>
+							<div class="form-group">			      
+							            <label>Введите спецификация:</label><br>
+							            <input type="text" name="Spec_caption" value="{{car.Spec_caption}}" class="form-control" placeholder="Введите спецификация" maxlength="30"/>
+						    </div>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class='col-sm-8'>
+							<div class="form-group">			      
+							            <label>Введите грузоподъемность/вместимость:</label><br>
+							            <input type="number" name="carrying" value="{{car.carrying}}" class="form-control" placeholder="Введите грузоподъемность/вместимость"/>
+						    </div>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class='col-sm-8'>
+							<div class="form-group">			       
+							            <label>Введите стоимость аренды:</label><br>
+							            <input type="number" name="rent" value="{{car.rent}}" class="form-control" placeholder="Введите аренды"/>
+							        
+			     		    </div>
+						</div>
+					</div>
+				</div>   
+			</form>
+		</div>
+		<div class="col">
+			<canvas id="funchart" width="400" height="400"></canvas>
+		</div>
+	</div>
+
+</div>		
+		<script type="text/javascript">  
+			
+			
+
+		    var timeFormat = 'DD-MM-YYYY HH:mm';
+
+		    var a = document.getElementById('funchart').getContext('2d');
+		    var myLineChart = new Chart(a, {
+		      type: 'line',
+		      data: {
+		              labels:[{% for i in profit %}{{ i.data }},{% endfor %}],
+		              datasets: 
+		              [
+		                {
+		                  label:'Заработано',
+		                  data: [{% for i in profit %}{{ i.cost }},{% endfor %}],
+		                  borderColor: 'rgba(50, 122, 17, 1)',
+		                  backgroundColor:'rgba(50, 122, 17, 0.3)',
+		                  
+		            
+		                }, 
+		                {
+		                  label:'Потрачено',
+		                  data: [{% for i in expenses %}{{ i.cost }},{% endfor %}],
+		                  borderColor: 'rgba(161, 5, 5, 1)',
+		                  backgroundColor:'rgba(161, 5, 5, 0.3)',
+		                  
+		                }, 
+		              ]
+		      },
+		      options: {
+		        title: {
+		          
+		        },
+		        scales: {
+		          xAxes: [{
+		            type: 'time',
+		            time: {
+		              parser: timeFormat,
+		             // round: 'day'
+		              tooltipFormat: 'll HH:mm'
+		            },
+		            scaleLabel: {
+		              display: true,
+		             
+		            }
+		          }],
+		          yAxes: [{
+		            scaleLabel: {
+		              display: true,
+		             
+		            }
+		          }]
+		        },
+		      }
+		    });
+
+
+
+  </script>
+
+</div>
+    <div class="container">
+    	<div class="row">
+    		
+
+    		<div class="col-lg">
+    			
+    			<h2>Заработано:</h2>
+    		
+    				<!--
+						<input type="submit" class="btn btn-primary" value="Сохранить" >
+						<input type="submit" class="btn btn-primary" value="Добавить" >
+					-->
+					<div class="container">
+						<div class="row">
+							<div class='col-sm-8'>
+								<div class="form-group">
+									<a href="createpr/" class="btn btn-primary">Добавить</a>
+    						    </div>
+							</div>
+						</div>
+					</div>
+				
+		    	<table class="table table-bordered">
+				  <thead>
+				    <tr>
+				      <th scope="col">Наименование</th>
+				      <th scope="col">Сумма</th>
+				      <th scope="col">Дата</th>
+				      <th scope="col"></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% for profit in profit %}
+				    	<tr>
+						      <td>{{profit.description}}</td>
+						      <td>{{profit.cost}} руб.</td>
+						      <td>{{profit.data}}</td>
+						      <td><a href="#">Изменить </a> | <a href="#">Удалить</a></td>
+				   	 	</tr>
+				    {% endfor %}
+				  </tbody>
+				</table>
+		
+    		</div>
+    		<div class="col-lg">
+				<h2>Потрачено:</h2>
+				
+					<!--
+						<input type="submit" class="btn btn-primary" value="Сохранить" >
+						<input type="submit" class="btn btn-primary" value="Добавить" >
+					-->
+					<div class="container">
+						<div class="row">
+							<div class='col-sm-8'>
+								<div class="form-group">
+									<a href="createex/" class="btn btn-primary">Добавить</a>
+							    </div>
+							</div>
+						</div>
+					</div>
+				
+				
+
+		    	<table class="table table-bordered">
+				  <thead>
+				    <tr>
+				      <th scope="col">Наименование</th>
+				      <th scope="col">Сумма</th>
+				      <th scope="col">Дата</th>
+				      <th scope="col"></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% for expenses in expenses %}
+				    	<tr>
+						      <td>{{expenses.description}}</td>
+						      <td>{{expenses.cost}} руб.</td>
+						      <td>{{expenses.data}}</td>
+						      <td><a href="editEx/{{expenses.id}}">Изменить </a> | <a href="deleteEx/{{expenses.id}}">Удалить</a></td>
+				   	 	</tr>
+				    {% endfor %}
+				  </tbody>
+				</table>
+
+    		</div>
+    	</div>
+    </div>
+	<div class="container">
+			<div class="row">
+				<div class="col">
+					<p><a href="createrep/" class="btn btn-primary">Добавить ремонт</a></p>
+					<table class="table table-bordered">
+					  <thead>
+					    <tr>
+					      <th scope="col">Время начала и окончания работ</th>
+					      <th scope="col">Наименование запчастей</th>
+					      <th scope="col">Вид ремонта</th>
+					      <th scope="col">Исполнитель</th>
+					      <th scope="col"></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	{% for rep in rep %}
+					    	<tr>
+							      <td>{{rep.data_start}} - {{rep.data_end}}</td>
+							      <td>{{rep.description}}</td>
+							      <td>{{rep.type}}</td>
+							      <td>{{rep.worker}} руб.</td>
+							      <td><a href="#">Изменить </a> | <a href="#">Удалить</a></td>
+					   	 	</tr>
+					    {% endfor %}
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+<!--<script src="{% static 'js/graf.js' %}"></script>-->
+{% endblock %}
